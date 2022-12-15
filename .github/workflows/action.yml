@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.14.2'
-
+          cache: 'npm'
       - name: Depend install and serve
         env:
           COOKIE: ${{ secrets.COOKIE }}
@@ -26,5 +26,5 @@ jobs:
           DINGDING_WEBHOOK: ${{ secrets.DINGDING_WEBHOOK }}
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
         run: |
-          npm install
+          npm ci
           npm run serve
