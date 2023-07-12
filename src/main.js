@@ -17,7 +17,7 @@ const growth = {
   freeDrawed: false, // 是否免费抽奖
   lotteryName: '', // 奖品名称
   collectedBug: false, // 是否收集 Bug
-  collectBugCount: 0, // 收集 Bug 的数量
+  collectBugCount: 0 // 收集 Bug 的数量
 }
 
 const message = () => {
@@ -31,7 +31,9 @@ ${growth.dippedLucky ? '今日已经沾过喜气' : `沾喜气 +${growth.dipValu
 当前幸运值 ${growth.luckyValue}
 免费抽奖次数 ${growth.freeCount}
 ${growth.freeDrawed ? `恭喜抽中 ${growth.lotteryName}` : '今日已免费抽奖'}
-${growth.collectedBug ? `收集 Bug +${growth.collectBugCount}` : '暂无可收集 Bug'}
+${
+  growth.collectedBug ? `收集 Bug +${growth.collectBugCount}` : '暂无可收集 Bug'
+}
 `.trim()
 }
 
@@ -44,6 +46,7 @@ const main = async () => {
 
     growth.userName = juejin.user.user_name
   } catch {
+    console.log('登录失败, 请尝试更新 Cookies')
     throw new Error('登录失败, 请尝试更新 Cookies')
   }
 
@@ -112,13 +115,13 @@ const main = async () => {
 
   pushMessage({
     type: 'info',
-    message: message(),
+    message: message()
   })
 }
 
 main().catch(error => {
   pushMessage({
     type: 'error',
-    message: error.stack,
+    message: error.stack
   })
 })
