@@ -9,10 +9,11 @@ const pushplus = async ({ title = '', content = '' } = {}) => {
         token: PUSHPLUS_TOKEN,
         template: 'markdown',
         title,
-        content,
+        content
       })
       .then(response => {
         if (response?.data?.code !== SUCCESS_CODE) {
+          console.log(JSON.stringify(response?.data))
           throw new Error(response?.data?.msg)
         }
       })

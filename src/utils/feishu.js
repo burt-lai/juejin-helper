@@ -4,11 +4,15 @@ const SUCCESS_CODE = 0
 
 const feishu = async ({ title = '', content = '' } = {}) => {
   try {
-    await axios.post(FEISHU_WEBHOOK, template(title, content)).then(response => {
-      if (response?.data?.StatusCode !== SUCCESS_CODE) {
-        throw new Error(response?.data?.msg)
-      }
-    })
+    await axios
+      .post(FEISHU_WEBHOOK, template(title, content))
+      .then(response => {
+        if (response?.data?.StatusCode !== SUCCESS_CODE) {
+          console.log('飞书执行失败，完整的response?.data：')
+          console.log(response?.data)
+          throw new Error(response?.data?.msg)
+        }
+      })
   } catch (error) {
     console.log(error.stack)
   }
@@ -20,19 +24,19 @@ const template = (title, content) => ({
     header: {
       title: {
         tag: 'plain_text',
-        content: title,
-      },
+        content: title
+      }
     },
     elements: [
       {
         tag: 'div',
         text: {
           content,
-          tag: 'lark_md',
-        },
-      },
-    ],
-  },
+          tag: 'lark_md'
+        }
+      }
+    ]
+  }
 })
 
 module.exports = feishu
