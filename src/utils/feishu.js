@@ -14,6 +14,7 @@ const feishu = async ({ title = '', content = '' } = {}) => {
         }
       })
   } catch (error) {
+    console.log('feishu的catch:', error)
     console.log(error.stack)
   }
 }

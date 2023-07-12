@@ -11,7 +11,7 @@ const {
 } = require('../ENV.js')
 
 const pushMessage = ({ type, message }) => {
-  console.log(message)
+  console.log('pushMessage的message:', message)
 
   // EMAIL &&
   //   AUTHORIZATION_CODE &&
